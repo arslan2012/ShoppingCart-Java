@@ -10,10 +10,7 @@ public class _2013211392_阿尔斯兰_7_Sale implements _2013211392_阿尔斯兰
 		observers = new ArrayList<_2013211392_阿尔斯兰_7_Observer>();
 	}
 	public void additem(_2013211392_阿尔斯兰_7_SaleLineItem o){
-		for (int i = 0; i < items.size(); i++){
-			if (items.get(i).equals(o))
-				items.remove(i);
-		}
+		items.removeIf(item -> item.equals(o));
 		items.add(o);
 		this.notifyObservers();
 	}
@@ -21,11 +18,9 @@ public class _2013211392_阿尔斯兰_7_Sale implements _2013211392_阿尔斯兰
 		return items;
 	}
 	public double getTotal(){
-		double sum = 0;
-		for (int i = 0;i < items.size();i++){
-			sum+=items.get(i).getSubTotal();
-		}
-		return sum;
+		return items.stream()
+				.map(_2013211392_阿尔斯兰_7_SaleLineItem::getSubTotal)
+				.reduce(0.0,Double::sum);
 	}
 	@Override
     public void registerObserver(final _2013211392_阿尔斯兰_7_Observer o)
@@ -45,9 +40,6 @@ public class _2013211392_阿尔斯兰_7_Sale implements _2013211392_阿尔斯兰
     @Override
     public void notifyObservers()
     {
-        for (final _2013211392_阿尔斯兰_7_Observer o : observers)
-        {
-            o.update(items);
-        }
+        this.observers.forEach(o -> o.update(items));
     }
 }

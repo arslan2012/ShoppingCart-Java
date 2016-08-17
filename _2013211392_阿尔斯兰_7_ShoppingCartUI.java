@@ -1,14 +1,10 @@
 package homework7;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class _2013211392_阿尔斯兰_7_ShoppingCartUI extends JFrame implements _2013211392_阿尔斯兰_7_Observer{
@@ -28,17 +24,17 @@ public class _2013211392_阿尔斯兰_7_ShoppingCartUI extends JFrame implements
 
 	@Override
 	public void update(ArrayList<_2013211392_阿尔斯兰_7_SaleLineItem> items) {
-		double sum = 0;
 		try {remove(panel);}
 				catch(Exception e1){ ;}
 		panel = new JPanel();
 		add(panel);
 		panel.setLayout(new GridLayout(items.size()+1,1));
-		for (int i=0;i < items.size();i++){
-			panel.add(new JLabel(items.get(i).toString(),JLabel.CENTER));
-			sum+=items.get(i).getSubTotal();
-		}
-		panel.add(new JLabel("总价:"+Double.toString(sum),JLabel.CENTER));
+		items.stream().map(item -> panel.add(new JLabel(item.toString(),JLabel.CENTER))).count();
+		panel.add(new JLabel("总价:"+Double.toString(
+				items.stream()
+				.map(_2013211392_阿尔斯兰_7_SaleLineItem::getSubTotal)
+				.reduce(0.0,Double::sum)
+				),JLabel.CENTER));
 		//设置内容框格的颜色
 	    panel.setBackground(Color.yellow);
 	}

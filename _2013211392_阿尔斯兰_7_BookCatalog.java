@@ -8,9 +8,9 @@ public class _2013211392_阿尔斯兰_7_BookCatalog {
 		books = new ArrayList<_2013211392_阿尔斯兰_7_BookSpecification>();
 	}
 	public _2013211392_阿尔斯兰_7_BookSpecification getBookSpecification(String str){
-		for (int i=0;i <= books.size();i++){
-			if (books.get(i).getIsbn().equalsIgnoreCase(str))
-				return books.get(i);
+		for (_2013211392_阿尔斯兰_7_BookSpecification book : books){
+			if (book.getIsbn().equalsIgnoreCase(str))
+				return book;
 		}
 		return null;
 	}

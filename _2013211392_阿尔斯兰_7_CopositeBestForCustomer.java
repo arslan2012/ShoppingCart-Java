@@ -1,6 +1,7 @@
 package homework7;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class _2013211392_阿尔斯兰_7_CopositeBestForCustomer extends _2013211392_阿尔斯兰_7_CopositeStrategy {
 	
@@ -13,12 +14,11 @@ public class _2013211392_阿尔斯兰_7_CopositeBestForCustomer extends _2013211
 
 	@Override
 	public double getSubTotal(_2013211392_阿尔斯兰_7_SaleLineItem i) {
-		double num = this.strategies.get(0).getSubTotal(i);;
-		for (int j=0;j<this.strategies.size();j++){
-			if (this.strategies.get(j).getSubTotal(i) >= num)
-				num = this.strategies.get(j).getSubTotal(i);
-		}
-		return num;
+		return this.strategies.stream()
+				.min(Comparator.comparing(strategy -> strategy.getSubTotal(i)))
+				.get()
+				.getSubTotal(i);
+
 	}
 
 	@Override
