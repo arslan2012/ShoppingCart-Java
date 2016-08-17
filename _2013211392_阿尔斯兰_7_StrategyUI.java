@@ -85,7 +85,7 @@ public class _2013211392_阿尔斯兰_7_StrategyUI extends JFrame{
 				strats.add(new Checkbox(booktype[i-1]));
 			}
 		}
-		strats.stream().map(strat -> complex.add(strat));
+		strats.forEach(strat -> complex.add(strat));
 		complex.add(add_c);
 		add_c.addActionListener(event -> {
 			int tmp2 = 0;

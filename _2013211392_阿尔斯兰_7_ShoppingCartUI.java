@@ -29,7 +29,7 @@ public class _2013211392_阿尔斯兰_7_ShoppingCartUI extends JFrame implements
 		panel = new JPanel();
 		add(panel);
 		panel.setLayout(new GridLayout(items.size()+1,1));
-		items.stream().map(item -> panel.add(new JLabel(item.toString(),JLabel.CENTER))).count();
+		items.forEach(item -> panel.add(new JLabel(item.toString(),JLabel.CENTER)));
 		panel.add(new JLabel("总价:"+Double.toString(
 				items.stream()
 				.map(_2013211392_阿尔斯兰_7_SaleLineItem::getSubTotal)

@@ -20,9 +20,7 @@ public class _2013211392_阿尔斯兰_7_BuyUI extends JFrame{
 	public _2013211392_阿尔斯兰_7_BuyUI() throws HeadlessException {
 		setTitle("Homework7 Buy");
 		setLayout(new GridLayout(_2013211392_阿尔斯兰_7_MainUI.controller.getBookCatalog().books.size() + 5, 1));
-		for (_2013211392_阿尔斯兰_7_BookSpecification book : _2013211392_阿尔斯兰_7_MainUI.controller.getBookCatalog().books) {
-			add(new JLabel(book.toString(),JLabel.CENTER));
-		}
+		_2013211392_阿尔斯兰_7_MainUI.controller.getBookCatalog().books.forEach(book -> add(new JLabel(book.toString(),JLabel.CENTER)));
 		add(new JLabel("ISBN:", JLabel.CENTER));
 		add(isbn);
 		add(new JLabel("数量:", JLabel.CENTER));
